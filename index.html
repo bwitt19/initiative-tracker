@@ -10,7 +10,22 @@
 </head>
 
 <body>
-    <h2 class="jumbotron">Simple Initiative Tracker</h2>
+    <div class="jumbotron">
+        <h2>Simple Initiative Tracker</h2>
+    </div>
+
+    <div class="container newChar">
+        <h4>Enter a new character:</h4>
+        <div>
+            <input id="newName" type="text" placeholder="Name:"><br>
+            <input id="newInit" type="text" placeholder="Initiative:">
+            <input id="newDex" type="text" placeholder="Dex. Mod: (If tie)">
+        </div>
+        <button class="btn-primary btn" onclick="addToInit()">Add to Initiative!</button>
+        <button class="btn-danger btn" onclick="startBattle()">Start the Encounter!</button>
+        <p id="test"></p>
+    </div>
+
     <div class="container" id="unsortedTable">
         <table class="table" id="initTable">
             <thead>
@@ -28,20 +43,22 @@
                 </tr>
             </tbody>
         </table>
+        <hr>
     </div>
 
-    <hr>
     <div class="container newChar">
-        <h4>Enter a new character:</h4>
-        <div>
-            <input id="newName" type="text" placeholder="Name:"><br>
-            <input id="newInit" type="text" placeholder="Initiative:">
-            <input id="newDex" type="text" placeholder="Dex. Mod: (If tie)">
-        </div>
-        <button class="btn-primary btn" onclick="addToInit()">Add to Initiative!</button>
-        <button class="btn-danger btn" onclick="startBattle()">Start the Encounter!</button>
-        <p id="test"></p>
+        <h4>Instructions:</h4>
+        <p>Enter a character's name, initiative roll, and dexterity
+            modifier (to settle ties in initiative). Press the "Start the
+            Encounter" button to sort the table.</p>
+        <p>Notes: If initative is left blank, a random number from 1-20 will be
+            selected. (Dexterity mod will still be 0, however.) You can also
+            create multiple creatures of the same type; they will be
+            differentiated when the table is sorted.
+            (e.g. "Goblin", "Goblin" -> "Goblin A", "Goblin B")
     </div>
+
+    <div id="sortedTable"></div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
