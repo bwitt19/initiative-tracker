@@ -141,6 +141,6 @@ function sortByInitiative() {
     }
 
     sortedTable += "</tbody></table></div>"
-    $("body").append(sortedTable);
+    $("#sortedTable").append(sortedTable);
     // End test
 }

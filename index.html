@@ -11,7 +11,8 @@
 
 <body>
     <div class="jumbotron">
-        <h2>Simple Initiative Tracker</h2>
+        <h1>Simple Initiative Tracker</h1>
+        <p>For Dungeons & Dragons (Or your tabletop game of choice)</p>
     </div>
 
     <div class="container newChar">
@@ -52,13 +53,19 @@
             modifier (to settle ties in initiative). Press the "Start the
             Encounter" button to sort the table.</p>
         <p>Notes: If initative is left blank, a random number from 1-20 will be
-            selected. (Dexterity mod will still be 0, however.) You can also
-            create multiple creatures of the same type; they will be
-            differentiated when the table is sorted.
+            selected. (Dexterity mod will still be 0, however.)<br>
+            You can also create multiple creatures of the same type; they will
+            be differentiated when the table is sorted.<br>
             (e.g. "Goblin", "Goblin" -> "Goblin A", "Goblin B")
     </div>
 
     <div id="sortedTable"></div>
+
+    <div class="container" id="credits">
+        <hr>
+        <p style="text-align: center; font-size: 0.8em">Created by Brendan Witt <a href="https://github.com/bwitt19">(GitHub)</a>
+            <br>Made with HTML, JavaScript, jQuery, and Bootstrap.</p>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
