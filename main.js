@@ -5,12 +5,18 @@ var NAME       = 0;
 var DEX_MOD    = 1;
 var INITIATIVE = 2;
 
+// In duplicate name checker
+var ASCII_UPPER_A = 65;
+
 
 // addToInit() - Prec: Event - Add to Initiative button pressed
 function addToInit() {
     var newRow = "<tr class=\"character\">";
     var charInfo = [$("#newName").val(), $("#newDex").val(), $("#newInit").val()];
     var $output = $("#test");
+
+    if (charInfo[NAME] === "")
+        charInfo[NAME] = "Personman";
 
     // Format dexterity modifier
     if (charInfo[DEX_MOD] === "")
@@ -33,6 +39,8 @@ function addToInit() {
 // startBattle() -- Prec: Event - Start the Encounter button pressed
 function startBattle() {
     sortByInitiative();
+    $("#unsortedTable").slideUp(500);
+    $(".newChar").slideUp(500);
     // todo: Implement stuff here
     // Start doing things (turn display, waiting in initiative, delete from tbl)
     // Maybe change button characteristics to a next turn button
@@ -94,6 +102,22 @@ function sortByInitiative() {
         }
     }
 
+    // Identify and mark duplicate character names
+    for (i = 0; i < players.length - 1; i++) {
+        var sameNames = [i];
+        for (j = 0; j < players.length; j++) {
+            if (players[i][NAME] === players[j][NAME] && i !== j)
+                sameNames.push(j);
+        }
+        if (sameNames.length !== 1) {
+            var m = 0;
+            for (var k = 0; k < sameNames.length; k++) {
+                players[sameNames[k]][NAME] = players[sameNames[k]][NAME] + " "
+                    + String.fromCharCode(ASCII_UPPER_A + m++);
+            }
+        }
+    }
+
     // Test log
     console.log("Sorted:");
     for (i = 0; i < players.length; i++) {
@@ -105,7 +129,7 @@ function sortByInitiative() {
     // End Test
 
     // Test table (the following line is the table head a la first table displayed)
-    var sortedTable = "<hr><div class=\"container\"><table class=\"table\" id=\"initTable\"><thead><tr><th scope=\"col\">Name</th><th scope=\"col\">Dex. Mod</th><th scope=\"col\">Initiative</th></tr></thead><tbody>";
+    var sortedTable = "<hr><div class=\"container\" id=\"sortedTable\"><table class=\"table\"><thead><tr><th scope=\"col\">Name</th><th scope=\"col\">Dex. Mod</th><th scope=\"col\">Initiative</th></tr></thead><tbody>";
 
     // Format and append new data into row
     for (i = 0; i < players.length; i++) {
