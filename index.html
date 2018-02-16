@@ -140,6 +140,22 @@
             }
         }
         // End Test
+
+        // Test table (the following line is the table head a la first table displayed)
+        var sortedTable = "<hr><table class=\"table\" id=\"initTable\"><thead><tr><th scope=\"col\">Name</th><th scope=\"col\">Dex. Mod</th><th scope=\"col\">Initiative</th></tr></thead><tbody>";
+
+        // Format and append new data into row
+        for (i = 0; i < players.length; i++) {
+            sortedTable += "<tr>";
+            sortedTable += "<td class=\"name\">" + players[i][NAME] + "</td>";
+            sortedTable += "<td class=\"dex\">" + players[i][DEX_MOD].toString() + "</td>";
+            sortedTable += "<td class=\"init\">" + players[i][INITIATIVE].toString() + "</td>";
+            sortedTable += "</tr>";
+        }
+
+        sortedTable += "</tbody></table>"
+        $("body").append(sortedTable);
+        // End test
     }
 
 
