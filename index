@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D&amp;D Initiative Tracker</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <h2 class="jumbotron">Simple Initiative Tracker</h2>
+    <div class="container">
+        <table class="table" id="initTable">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Dex. Mod</th>
+                    <th scope="col">Initiative</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name">Mark</td>
+                    <td class="dex">+2</td>
+                    <td class="init">13</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <div class="container">
+        <h4>Enter a new character:</h4>
+        <div class="newChar">
+            <input id="newName" type="text" placeholder="Name:"><br>
+            <input id="newInit" type="text" placeholder="Initiative:">
+            <input id="newDex" type="text" placeholder="Dex. Mod: (If tie)">
+        </div>
+        <button class="btn-primary btn" onclick="addToInit()">Add to Initiative!</button>
+        <button class="btn-danger btn" onclick="startBattle()">Start the Encounter!</button>
+        <p id="test"></p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    /* Constants: */
+    var NAME       = 0;
+    var DEX_MOD    = 1;
+    var INITIATIVE = 2;
+
+    function addToInit() {
+        var newRow = "<tr class=\"character\">";
+        var charInfo = [$("#newName").val(), $("#newDex").val(), $("#newInit").val()];
+        var $output = $("#test");
+
+        // Format dexterity modifier
+        if (charInfo[DEX_MOD] === "" || charInfo[DEX_MOD] === "0")
+            charInfo[DEX_MOD] = "-";
+
+        // If no value for initiative, randomize
+        if (charInfo[INITIATIVE] === "")
+            charInfo[INITIATIVE] = Math.floor(Math.random() * 20) + 1;
+
+        // Format and append new data into row
+        newRow += "<td class=\"name\">" + charInfo[NAME] + "</td>";
+        newRow += "<td class=\"dex\">" + charInfo[DEX_MOD] + "</td>";
+        newRow += "<td class=\"init\">" + charInfo[INITIATIVE] + "</td>";
+
+        newRow += "</tr>";
+        $("#initTable > tbody:last-child").append(newRow);
+    }
+
+    function startBattle() {
+        sortByInitiative();
+        // Start doing things
+        // Maybe change button characteristics to a next turn button
+        //   with diff. functionality (unhide, and hide start battle btn)
+    }
+
+    function sortByInitiative() {
+        var playerNames = $(".name");
+        var playerDex   = $(".dex");
+        var playerInits = $(".init");
+        var players = [];
+
+        // var mark = jQuery.text(playerNames[0]);
+
+        for (var i = 0; i < playerNames.length; i++) {
+            var stats = [];
+            stats.push( jQuery.text(playerNames[i]) );
+            stats.push( jQuery.text(playerDex[i]) );
+            stats.push( jQuery.text(playerInits[i]) );
+            players.push(stats)
+        }
+
+        // Test log
+        for (i = 0; i < players.length; i++) {
+            console.log(i + 1);
+            for (var j = 0; j < 3; j++) {
+                console.log("   " + players[i][j]);
+            }
+        }
+        // End Test
+
+        // Implement sorting algorithm here!
+        // Selection sort (because who needs big O)
+        for (var i = 0; i < players.length - 1; i++) {
+            var min = i;
+            for (var j = i + 1; j < players.length; j++)
+                if (players[j][INITIATIVE] < players[min][INITIATIVE]) min = j;
+            var temp = players[i];
+            players[i] = players[min];
+            players[min] = temp;
+        }
+
+        // Test log
+        console.log("Sorted:");
+        for (i = 0; i < players.length; i++) {
+            console.log(i + 1);
+            for (var j = 0; j < 3; j++) {
+                console.log("   " + players[i][j]);
+            }
+        }
+        // End Test
+    }
+
+
+    </script>
+</body>
+
+</html>
