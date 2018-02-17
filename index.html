@@ -19,8 +19,8 @@
         <h4>Enter a new character:</h4>
         <div>
             <input id="newName" type="text" placeholder="Name:"><br>
-            <input id="newInit" type="text" placeholder="Initiative:">
-            <input id="newDex" type="text" placeholder="Dex. Mod: (If tie)">
+            <input id="newInit" type="number" placeholder="Initiative:">
+            <input id="newDex" type="number" placeholder="Dex. Mod: (If tie)">
         </div>
         <button class="btn-primary btn" onclick="addToInit()">Add to Initiative!</button>
         <button class="btn-danger btn" onclick="startBattle()">Start the Encounter!</button>
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="name">Mark</td>
+                    <td class="name">Example: Mark</td>
                     <td class="dex">2</td>
                     <td class="init">13</td>
                 </tr>

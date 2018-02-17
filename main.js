@@ -57,7 +57,8 @@ function sortByInitiative() {
 
     // var mark = jQuery.text(playerNames[0]);
 
-    for (var i = 0; i < playerNames.length; i++) {
+    // For loop starts at 1, so it doesn't include "Example: Mark"
+    for (var i = 1; i < playerNames.length; i++) {
         var stats = [];
         stats.push( jQuery.text(playerNames[i]) );
         stats.push( Number(jQuery.text(playerDex[i])) );
